@@ -10,6 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
+// This ended up not working.  
+// Apparently the Hazelcast transport is a singleton internally.
 public class DropboxTest {
 
 	@Before

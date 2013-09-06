@@ -5,17 +5,13 @@ import java.nio.file.Path;
 
 import org.cs27x.dropbox.DropboxCmd.OpCode;
 import org.cs27x.filewatcher.FileState;
-import org.cs27x.filewatcher.FileStates;
 
 public class DropboxCmdProcessor implements DropboxTransportListener {
 
 	private final FileManager fileManager_;
 
-	private final FileStates fileStates_;
-
-	public DropboxCmdProcessor(FileStates states, FileManager mgr) {
+	public DropboxCmdProcessor(FileManager mgr) {
 		super();
-		fileStates_ = states;
 		fileManager_ = mgr;
 	}
 
@@ -33,7 +29,7 @@ public class DropboxCmdProcessor implements DropboxTransportListener {
 				fileManager_.delete(resolved);
 			}
 			
-			fileStates_.updateFileState(cmd, resolved);
+			fileManager_.updateFileState(cmd, resolved);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);

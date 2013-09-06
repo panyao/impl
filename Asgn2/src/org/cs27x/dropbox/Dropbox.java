@@ -5,22 +5,21 @@ import java.nio.file.Paths;
 
 import org.cs27x.filewatcher.DropboxFileEventHandler;
 import org.cs27x.filewatcher.FileReactor;
-import org.cs27x.filewatcher.FileStates;
 
 public class Dropbox {
 
-	private HazelcastTransport transport_;
+	private DropboxTransport transport_;
 	private DropboxProtocol protocol_;
 	private FileReactor reactor_;
+	private FileManager manager_;
 	
+	// Dependency injection yo
 	public Dropbox(Path rootdir){
-		FileStates states = new FileStates();
 		reactor_ = new FileReactor(rootdir);
-		FileManager filemgr = new DefaultFileManager(rootdir);
+		manager_ = new DefaultFileManager(rootdir); // Only used here
 		transport_ = new HazelcastTransport();
-		protocol_ = new DropboxProtocol(transport_, states, filemgr);
-
-		reactor_.addHandler(new DropboxFileEventHandler(filemgr,states,protocol_));
+		protocol_ = new DropboxProtocol(transport_, manager_); // Only used here 
+		reactor_.addHandler(new DropboxFileEventHandler(manager_, protocol_));
 	}
 	
 	public void connect(String server) throws Exception {

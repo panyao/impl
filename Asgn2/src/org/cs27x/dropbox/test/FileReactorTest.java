@@ -20,6 +20,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+// Could not get this to work either
+// File reactor was started, and file was written but no events...
 public class FileReactorTest {
 
 	@Before
@@ -27,7 +29,6 @@ public class FileReactorTest {
 		reactor = new FileReactor(path.getParent());
 		manager = new DefaultFileManager(path.getParent());
 		reactor.addHandler(mockHandler);
-		spy = spy(reactor);
 	}
 
 	@After
@@ -47,7 +48,8 @@ public class FileReactorTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//verify(spy, times(1)).dispatch(any(FileEvent.class));
+		
+		verify(mockHandler).handle(any(FileEvent.class));
 	}
 	
 	private class ReactorThread extends Thread {
@@ -63,7 +65,6 @@ public class FileReactorTest {
 	}
 
 	private FileReactor reactor;
-	private FileReactor spy;
 	private FileEventHandler mockHandler = mock(FileEventHandler.class);
 	private Path path = Paths.get("test-data/sandbox/test", new String[] {});
 	private FileManager manager;

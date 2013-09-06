@@ -50,6 +50,7 @@ public class HazelcastTransport implements DropboxTransport,
 		checkConnected();
 	}
 	
+	@Override
 	public void disconnect(){
 		Hazelcast.shutdown();
 	}
@@ -109,6 +110,7 @@ public class HazelcastTransport implements DropboxTransport,
 		return connected_;
 	}
 	
+	@Override
 	public synchronized void awaitConnect(long timeout) throws InterruptedException {
 		if(!connected_){
 			if(timeout > 0){

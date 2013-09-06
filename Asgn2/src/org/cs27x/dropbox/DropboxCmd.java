@@ -2,7 +2,7 @@ package org.cs27x.dropbox;
 
 import java.io.Serializable;
 
-public class DropboxCmd implements Serializable, IDropboxCmd {
+public class DropboxCmd implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,6 @@ public class DropboxCmd implements Serializable, IDropboxCmd {
 	/* (non-Javadoc)
 	 * @see org.cs27x.dropbox.IDropboxCmd#getPath()
 	 */
-	@Override
 	public String getPath() {
 		return path_;
 	}

@@ -21,7 +21,7 @@ public class DropboxProtocolTest {
 
 	@Before
 	public void setUp() throws Exception {
-		protocol = new DropboxProtocol(transport, null, null);
+		protocol = new DropboxProtocol(transport, null);
 		when(mockPath.getFileName()).thenReturn(mockPath);
 		when(mockPath.getFileName().toString()).thenReturn("test");
 	}
