@@ -1,0 +1,18 @@
+participant init/Linux
+participant app_process
+participant ZygoteInit
+participant ZygoteConnection
+participant etcServices
+init/Linux->app_process: Runs app_process, named zygote
+app_process->app_process: AndroidRuntime.start(ZygoteInit)
+app_process->ZygoteInit: ZygoteInit.main(...)
+ZygoteInit->ZygoteInit: registerZygoteSocket()
+ZygoteInit->ZygoteInit: preloadClasses()
+ZygoteInit->ZygoteInit: preloadResources()
+ZygoteInit->ZygoteInit: startSystemServer()
+ZygoteInit->ZygoteInit: runForkMode() or runSelectLoopMode
+ZygoteInit->ZygoteInit: acceptCommandPeer()
+etcServices->ZygoteInit: connect to Zygote's server socket
+ZygoteConnection->ZygoteInit: ZygoteConnection made
+ZygoteInit->ZygoteConnection: ZygoteConnection.runOnce()
+ZygoteConnection->init/Linux: Zygote.forkAndSpecialize(...)
