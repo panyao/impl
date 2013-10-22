@@ -1,0 +1,33 @@
+--Most Common/Merges
+1 - Abstracting Command class in some form.  The best is with an interface having an execute(...) method. 
+2 - Merged Li-Bao-Xiao-Yao PhotoCommand with Badash-KZ-Hanlin
+
+--Kelly, Story, Whalen
+Refactor 1:
+	Abstracting Command is good, but I think an interface is preferable to an abstract base class in this case.  For example,
+	PhotoCommand doesn't use the msg or toastLength members of the base class.  To me, that means that part of the structure of
+	PhotoCommand is dictated by an artifact from a totally separate subclass.
+Refactor 2/3:
+	This is really just an extraneous wrapper for a collection.
+
+--Smith, Walker
+Refactor 1:
+	Abstracting Command with execute method is good, the other interface methods are unnecessary.  There is no place where
+	postCmd() is used, and all initCmd() calls simply do work that could just as easily be done in execute before calling
+	execute.
+Refactor 2:
+	<Factory stuff....> Tangled Command instantiations
+
+--Li, Bao, Xiao, Yao
+Refactor 1:
+	Again, just a wrapper around a collection
+Refactor 2;
+	Good.  Object varargs in execute method is only used to extract the element at [0] and then cast to a String, so this can
+	be replaced with a String.
+Refactor 3:
+	I don't see any reason to do this.  This way, the app will only properly function once the 'thief' has deliberately opened
+	the application.
+
+--Badash, KZ, Hanlin
+	Blunt honesty, this is the basis for the supermerge.  Remained largely untouched.
+
